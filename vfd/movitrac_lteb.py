@@ -44,8 +44,14 @@ class MovitracLTEB(VFD):
 
     def is_running(self):
         message = rtu.read_holding_registers(DEVICE_ADDRESS, REG_PI1_STATUS_WORD, 1)
-        (response,) = rtu.send_message(message, self.serial)
-        return bool(response & 0b0000010000000000)
+
+        # TEMP
+        message_hex = message.hex(sep=" ")
+        message_int = int.from_bytes(message, byteorder="big")
+
+        # (response,) = rtu.send_message(message, self.serial)
+
+        return bool(response & 0x400)
 
     def get_frequency(self):
         message = rtu.read_holding_registers(DEVICE_ADDRESS, REG_PI2_ACTUAL_SPEED, 1)

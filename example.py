@@ -6,6 +6,9 @@ import time
 my_vfd = MovitracLTEB()
 # Open the serial port
 
+# TEMP
+my_vfd.is_running()
+
 my_vfd.connect("/dev/tty.usbserial-12345678")
 
 print("Starting Motor")

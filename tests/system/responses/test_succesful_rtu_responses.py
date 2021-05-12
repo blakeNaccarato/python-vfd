@@ -21,6 +21,10 @@ def send_message(adu, server):
     server.serial_port.write(adu)
     server.serve_once()
 
+    # TEMP
+    adu_hex = adu.hex(sep=" ")
+    adu_int = int.from_bytes(adu, byteorder="big")
+
     response_adu = server.serial_port.read(server.serial_port.in_waiting)
     return rtu.parse_response_adu(response_adu, adu)
 
