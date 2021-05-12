@@ -23,4 +23,4 @@ class VFD(ABC):
         pass
 
     def close(self):
-        self.serial.close()
+        self.serial.close()  # type:ignore
