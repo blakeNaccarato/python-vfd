@@ -1,4 +1,4 @@
-from . import VFD
+from vfd import VFD
 from umodbus.client.serial import rtu
 import serial
 import serial.rs485
@@ -25,7 +25,6 @@ REG_MOTOR_LOAD = 40224 - REG_START
 
 
 class MitsubishiD700(VFD):
-
     def connect(self, port):
         self.serial = serial.rs485.RS485(
             port=port,
@@ -37,25 +36,21 @@ class MitsubishiD700(VFD):
         )
 
     def is_running(self):
-        message = rtu.read_holding_registers(
-            DEVICE_ADDRESS, REG_STATUS_CONTROL, 1)
+        message = rtu.read_holding_registers(DEVICE_ADDRESS, REG_STATUS_CONTROL, 1)
         (response,) = rtu.send_message(message, self.serial)
         return bool(response & 0x1)
 
     def get_frequency(self):
-        message = rtu.read_holding_registers(
-            DEVICE_ADDRESS, REG_OUTPUT_FREQ, 1)
+        message = rtu.read_holding_registers(DEVICE_ADDRESS, REG_OUTPUT_FREQ, 1)
         (response,) = rtu.send_message(message, self.serial)
         return response * 0.01  # Hz
 
     def start(self, speed):
-        message = rtu.write_single_register(
-            DEVICE_ADDRESS, REG_STATUS_CONTROL, 0b10)
+        message = rtu.write_single_register(DEVICE_ADDRESS, REG_STATUS_CONTROL, 0b10)
         response = rtu.send_message(message, self.serial)
         return response
 
     def stop(self):
-        message = rtu.write_single_register(
-            DEVICE_ADDRESS, REG_STATUS_CONTROL, 0b1)
+        message = rtu.write_single_register(DEVICE_ADDRESS, REG_STATUS_CONTROL, 0b1)
         response = rtu.send_message(message, self.serial)
         return response

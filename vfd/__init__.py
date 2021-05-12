@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 
 class VFD(ABC):
-
     @abstractmethod
     def connect(self, port):
         pass

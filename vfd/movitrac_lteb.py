@@ -1,4 +1,4 @@
-from . import VFD
+from vfd import VFD
 from umodbus.client.serial import rtu
 import serial
 import serial.rs485
@@ -21,7 +21,7 @@ REG_PO2_SETPOINT_SPEED = 1  # 0 – 16384
 # 0xC000 = full speed reverse
 # 0xDFFF = half speed reverse
 
-REG_PO3_RAMP_TIME = 2      # 100 ms – 65535 ms
+REG_PO3_RAMP_TIME = 2  # 100 ms – 65535 ms
 
 # Read-only
 #########################
@@ -32,7 +32,6 @@ REG_PI4_MOTOR_TORQUE = 8
 
 
 class MovitracLTEB(VFD):
-
     def connect(self, port):
         self.serial = serial.rs485.RS485(
             port=port,
@@ -44,14 +43,12 @@ class MovitracLTEB(VFD):
         )
 
     def is_running(self):
-        message = rtu.read_holding_registers(
-            DEVICE_ADDRESS, REG_PI1_STATUS_WORD, 1)
+        message = rtu.read_holding_registers(DEVICE_ADDRESS, REG_PI1_STATUS_WORD, 1)
         (response,) = rtu.send_message(message, self.serial)
         return bool(response & 0b0000010000000000)
 
     def get_frequency(self):
-        message = rtu.read_holding_registers(
-            DEVICE_ADDRESS, REG_PI2_ACTUAL_SPEED, 1)
+        message = rtu.read_holding_registers(DEVICE_ADDRESS, REG_PI2_ACTUAL_SPEED, 1)
         (response,) = rtu.send_message(message, self.serial)
         return response
 
