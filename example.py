@@ -1,8 +1,9 @@
-from vfd.mitsubishi_d700 import MitsubishiD700
+# from vfd.mitsubishi_d700 import MitsubishiD700
+from vfd.movitrac_lteb import MovitracLTEB
 import time
 
 
-my_vfd = MitsubishiD700()
+my_vfd = MovitracLTEB()
 # Open the serial port
 
 my_vfd.connect("/dev/tty.usbserial-12345678")
