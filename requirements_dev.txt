@@ -4,8 +4,9 @@
 # build
 twine~=3.4
 
-# experiment
+# notebooks
 jupyter~=1.0
+nbstripout~=0.4
 
 # format
 black==21.5b0  # doesn't follow semver
