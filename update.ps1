@@ -1,4 +1,5 @@
-py -3.8 -m venv --clear .venv
+Remove-Item -Recurse -Force .venv
+py -3.8 -m venv .venv
 .venv/Scripts/activate
 pip install -U pip  # throws [WinError 5], but still works on its own
 pip install -U setuptools wheel
