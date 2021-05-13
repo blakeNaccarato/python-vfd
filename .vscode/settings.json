@@ -15,8 +15,8 @@
       "query": "default"
     },
     {
-      "label": "Created Issues",
-      "query": "author:${user} state:open repo:${user}/${repository} sort:created-desc"
+      "label": "All Open Issues",
+      "query": "state:open repo:blakeNaccarato/${repository} sort:created-desc"
     }
   ]
 }
