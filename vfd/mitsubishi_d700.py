@@ -47,10 +47,8 @@ class MitsubishiD700(VFD):
 
     def start(self, speed):
         message = rtu.write_single_register(DEVICE_ADDRESS, REG_STATUS_CONTROL, 0b10)
-        response = rtu.send_message(message, self.serial)
-        return response
+        return rtu.send_message(message, self.serial)
 
     def stop(self):
         message = rtu.write_single_register(DEVICE_ADDRESS, REG_STATUS_CONTROL, 0b1)
-        response = rtu.send_message(message, self.serial)
-        return response
+        return rtu.send_message(message, self.serial)

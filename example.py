@@ -11,8 +11,8 @@ print("Starting Motor")
 my_vfd.start(None)
 
 for _ in range(10):
-    print("Running: {}".format(my_vfd.is_running()))
-    print("Frequency: {}".format(my_vfd.get_frequency()))
+    print(f"Running: {my_vfd.is_running()}")
+    print(f"Frequency: {my_vfd.get_frequency()}")
     print()
     time.sleep(1)
 
@@ -20,8 +20,8 @@ print("Stopping Motor")
 my_vfd.stop()
 
 for _ in range(10):
-    print("Running: {}".format(my_vfd.is_running()))
-    print("Frequency: {}".format(my_vfd.get_frequency()))
+    print(f"Running: {my_vfd.is_running()}")
+    print(f"Frequency: {my_vfd.get_frequency()}")
     print()
     time.sleep(1)
 
