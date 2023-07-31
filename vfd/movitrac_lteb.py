@@ -8,6 +8,7 @@ DEVICE_ADDRESS = 1
 
 # Read/write
 #########################
+#PO = Process Output words
 
 REG_PO1_CONTROL_WORD = 0
 # 0x0006 = Start
@@ -25,6 +26,8 @@ REG_PO3_RAMP_TIME = 2  # 100 ms – 65535 ms
 
 # Read-only
 #########################
+#PI = Process Input Words
+
 REG_PI1_STATUS_WORD = 5
 REG_PI2_ACTUAL_SPEED = 6
 REG_PI3_ACTUAL_CURRENT = 7
@@ -52,8 +55,11 @@ class MovitracLTEB(VFD):
         (response,) = rtu.send_message(message, self.serial)
         return response
 
-    def start(self, speed):
-        raise NotImplementedError()
+    def start(self, speed, ramp_time):
+        rtu.write_single_register(DEVICE_ADDRESS,REG_PO1_CONTROL_WORD, 0b0110000000000000) #Slave ID, ADDRESS, Value
+        rtu.write_single_register(DEVICE_ADDRESS,REG_PO2_SETPOINT_SPEED, speed)
+        rtu.write_single_register(DEVICE_ADDRESS,REG_PO3_RAMP_TIME, ramp_time)
+        return 
 
     def stop(self):
         raise NotImplementedError()
